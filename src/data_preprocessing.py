@@ -11,6 +11,7 @@ we engineered and its corresponding label (star rating).
 """
 import sys
 import csv
+import time;
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -42,6 +43,7 @@ def preprocessData():
     
     # Using stemming to reduce variants of the same word
     # Ex: blossom->blossom, blossomed->blossom
+    print("starting data preprocessing at ", time.asctime( time.localtime(time.time()) ), "...")
     global corpus_stemmed
     ps = PorterStemmer()
     for text in corpus:
@@ -51,36 +53,48 @@ def preprocessData():
            stemmed = ps.stem(word)
            new_text = new_text + " " + stemmed
        corpus_stemmed.append(new_text)
+    print("... ending data preprocessing at ", time.asctime( time.localtime(time.time()) ))
+
        
 def extractFeatures():
     # Default vectorizer, see how good model will be with these features
     global features
-    global corpus_stemmed
+    global corpus
     global training_corpus
     global labels
-    vectorizer = TfidfVectorizer(min_df = 2, max_df = 0.5)#, ngram_range=(1,2)) # following tutorial: https://www.youtube.com/watch?v=7YacOe4XwhY
-    vectorizer.fit_transform(corpus_stemmed)
-    features.append(vectorizer.get_feature_names())
-    
+    print("starting feature extraction at ", time.asctime( time.localtime(time.time()) ), "...")
+
+    vectorizer = TfidfVectorizer(min_df = 0.001, max_df = 0.5)#, ngram_range=(1,2)) # following tutorial: https://www.youtube.com/watch?v=7YacOe4XwhY
+    vectorizer.fit_transform(corpus)
+    f = vectorizer.get_feature_names()
+    for each in f:
+        features.append(f)
+    print("number of features = ", len(features)-1)
+    print("...ending feature extraction at ", time.asctime( time.localtime(time.time()) ))
+
     # Turn each text review into a vector in terms of the features extracted
     index = 0
-    for text in corpus_stemmed:
+    print("starting training set vectorization at ", time.asctime( time.localtime(time.time()) ), "...")
+    for text in corpus: # THIS IS REALLY MEMORY-CONSUMING...
         document = []
         document.append(text)
         feature_vector = vectorizer.transform(document)
+        feature_array = feature_vector.toarray()
         feature_list = [labels[index]]
-        for each in feature_vector:
-            feature_list.append(each)
+        for s in range(feature_array.size):
+            feature_list.append(feature_array.item(s))
         training_corpus.append(feature_list)
         index = index + 1
+    print("...ending training set vectorization at ", time.asctime( time.localtime(time.time()) ))
     
 # This is the trainng data represented as feature vectors and corresponding labels
 # Will produce a .csv file called trainingData.csv
 def outputTrainingData():
     global features
     global training_corpus
+    print("starting training set vectorization at ", time.asctime( time.localtime(time.time()) ), "...")
     data_csv = [] #should be a list of lists, each list element is a row for csv
-    #print(len(features), "should equal", len(training_corpus[0]))
+    print(len(features), "should equal", len(training_corpus[0]))
     data_csv.append(features)
     for instance in training_corpus:
         data_csv.append(instance)
@@ -89,14 +103,14 @@ def outputTrainingData():
         writer = csv.writer(myFile)
         writer.writerows(data_csv)
     print("type of features should be a list: ", type(features), " and type of training corpus should be a list of lists: ", type(training_corpus[0]))
-    print("Done writing instances to trainingData.csv")
+    print("Done writing instances to trainingData.csv at ", time.asctime( time.localtime(time.time()) ))
     
 def main(argv):
     # Parse json file 
     result = pd.read_json('../data/data_train.json')
     
     extractData(result)
-    preprocessData()
+    #preprocessData()
     extractFeatures()
     outputTrainingData()
     
