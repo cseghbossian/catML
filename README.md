@@ -1,13 +1,17 @@
 # catML
 A Machine Learning project to predict star ratings from Yelp reviews.
 
-NOTE: The training dataset is too large to be uploaded onto Github. Download data_train.json [here](https://drive.google.com/open?id=1rplZW9D-kkY879lI50RbJ6lzId0Am9ms).
+TO DOs:
+Clean and comment each model's code
+Angelina -> Turn the the client ipynb into a python ipynb file that accepts in the command line a test set and will output a predictions file
 
-There will be a file in the data folder (after I finish running data_preprocessing.py) called __trainingData.csv__ with the following format:
+Everyone -> Add accuracy measurements in the report for each model they ran
 
-Labels | at | app | f3 | f4 
---- | --- | --- | --- |---
-2 | 0 | 0 | 2 | 1 
-1 | 0 | 0 | 1 | 0 
+Celine -> Any visuals would be helpful
 
-Each instance will be represented in this feature vector format we are familiar with, so make sure that your model's code will accept this input for data instances.
+Files that need to be kept in the zip file along with the code:
+pickled_feature_vectorizer
+pickled_svm
+pickled_perceptron
+pickled_nc
+pickled_logistic_regression
