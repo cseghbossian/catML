@@ -30,6 +30,6 @@ A Machine Learning project to predict star ratings from Yelp reviews. This progr
   
 ## Instructions for Testing a Dataset
 1. Unzip AgabinSeghbossianShrestha_code.zip 
-2. Run predictor_client.py with the testing dataset as the only argument to the program
+2. Run predictor_client.py with the filepath to the testing dataset as the only argument to the program
 3. The program will use a voting ensemble of four different models to output its predictions to predictions_group2.csv
 NOTE: Do not run any of the ipynb files. Many of them have long runtimes and rely on certain data files to be inside the working directory.
