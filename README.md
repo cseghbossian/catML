@@ -1,9 +1,4 @@
 # catML
-## Group Info
-Group 2
-- Angela Agabin \<aagabin\> ID: 1590090
-- Celine Seghbossian \<cseghbos\> ID: 1595557
-- Kaleen Shrestha \<kashrest\> ID: 1615749
   
 ## Overview
 A Machine Learning project to predict star ratings from Yelp reviews. This program uses five different models to conduct its multiclass classifications:
@@ -13,7 +8,7 @@ A Machine Learning project to predict star ratings from Yelp reviews. This progr
 * Nearest Centroid 
 * Voting Ensemble of the above four
 
-## List of Files in Submission
+## List of Files
 - Report.pdf - a report explaining the project
 - AgabinSeghbossianShrestha_predictions.csv - the final predictions for the provided test 
 - AgabinSeghbossianShrestha_code.zip - the zip file of all source code
