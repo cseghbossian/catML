@@ -11,7 +11,7 @@
 
 \maketitle
 
-\section{Tools Used (can be reduced if we go over the 3 page limit)}
+\section{Tools Used}
 We extensively made use of packages in NLTK for data pre-processing, Scikit-learn for feature extraction,  and ML algorithms, specifically:\\
 \\sklearn.feature\_extraction.text import TfidfVectorizer: This tool made use of the bag of word model by taking documents and extracting n-gram features. The hyper parameters were tuned to make use of the term-frequency - inverse document frequency (TF-IDF) to pick weights for features, favoring features/words that occur frequently within a single document but not frequently across all documents.\\
 \\nltk.stem import PorterStemmer: This tool was used to pre-process the text data by stemming words. An example would be that texts such as run, running, runs, runned would all be transformed to run.\\
